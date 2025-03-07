@@ -71,7 +71,6 @@ def rader_chart():
     plt.legend(fontsize=6)
     img = img_scr()
     plt.close()
-
     return img, rader_table
 
 
@@ -196,21 +195,6 @@ def stacked_bar_chart():
     plt.close()
     return img,stacked_table
 
-# def heatmap_chart():
-#     data=Heatmap_plot.objects.all()
-#     region=[x.region for x in data]
-#     jan=[x.january for x in data]
-#     feb=[x.february for x in data]
-#     mar=[x.march for x in data]
-#     apl=[x.april for x in data]
-#     may=[x.may for x in data]
-#     heat_table=pd.DataFrame({'Region':region,'jan':jan,'feb':feb,'mar':mar,'apl':apl,'may':may}).to_html(classes='table',index=False)
-#     plt.clf()
-#     heatmap_data = np.array([jan, feb, mar, apl, may])
-
-#     img=img_scr()
-#     plt.close()
-#     return img,heat_table
 
 def heatmap_chart():
     data = Heatmap_plot.objects.all()
