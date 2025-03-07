@@ -54,25 +54,6 @@ def bar_chart():
     plt.close()
     return img,bar_table
 
-# def rader_chart():
-#     data=Radar_plot.objects.all()
-#     aspect=[x.aspect for x in data]
-#     score=[x.score for x in data]
-#     rader_table=pd.DataFrame({'Aspect':aspect,'Sales':score}).to_html(classes='table',index=False)
-#     plt.clf()
-#     plt.figure(figsize=(5,5))
-#     plt.bar(aspect, score, color='skyblue', edgecolor='black')
-#     plt.xlabel('Aspect', fontsize=8)
-#     plt.ylabel('Score', fontsize=8)
-#     plt.title('Radar Plot Sales', fontsize=10)
-#     plt.xticks(rotation=0,fontsize=8)
-#     plt.yticks(fontsize=8)
-#     plt.tight_layout()
-#     plt.legend(loc='upper left')
-#     img=img_scr
-#     plt.close()
-#     return img,rader_table
-
 def rader_chart():
     data = Radar_plot.objects.all()
     aspect = [x.aspect for x in data]
