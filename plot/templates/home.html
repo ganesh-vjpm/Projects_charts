@@ -24,8 +24,9 @@
         }
 
         .table {
-            width: auto;
-            margin-top: 5px;
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 15px;
             border-collapse: collapse;
         }
 
@@ -52,38 +53,61 @@
     </style>
 </head>
 <body>
-    <h1>All Plots</h1>
-    <label for="cars">Choose the plot:</label>
-<select name="plots" id="plot">
-<option value="line_plot">Line Chart</option>
-<option value="pie_plot">Pie chart</option>
-<option value="bar_plot">Bar chart</option>
-<option value="box_polt">Box chart</option>
-<option value="radar_polt">Radar chart</option>
-<option value="histogram_plot">Histogram chart</option>
-<option value="area_plot">Area chart</option>
-<option value="scatter_plot">Scatter chart</option>
-<option value="heat_plot">Heatmap chart</option>
-<option value="stacked_plot">Stacked bar chart</option>
-</select>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1>All Plots</h1>
+        <label for="plots">Choose the plot:</label>
+        <select name="plots" id="plot">
+            <option value="">--select--</option>
+            <option value="Line chart">Line Chart</option>
+            <option value="Pie chart">Pie chart</option>
+            <option value="Bar chart">Bar chart</option>
+            <option value="Box chart">Box chart</option>
+            <option value="Rader chart">Radar chart</option>
+            <option value="Histogram">Histogram chart</option>
+            <option value="Area chart">Area chart</option>
+            <option value="Scatter chart">Scatter chart</option>
+            <option value="Heatmap chart">Heatmap chart</option>
+            <option value="Stacked bar">Stacked bar chart</option>
+        </select>
+        <input type="submit">
+    </form>
 
-    <div class="container">
-        {% for chart_name, chart_data in chart.items %}
-        <div class="chart-box">
-            <h2>{{ chart_name }}</h2>
-            <img src="data:image/png;base64,{{ chart_data.img }}" alt="{{ chart_name }}">
-        </div>
+    <div id="plot-results" class="container">
+        {% if chart_select %}
+            <div class="chart-box">
+                <h2>{{ chart_select.title }}</h2>
+                <img src="data:image/png;base64,{{ chart_select.img }}" alt="{{ chart_select.title }}">
+            </div>
+        {% endif %}
+
+        {% for chart_name, chart_data in chart_rest.items %}
+            <div class="chart-box">
+                <h2>{{ chart_name }}</h2>
+                <img src="data:image/png;base64,{{ chart_data.img }}" alt="{{ chart_name }}">
+            </div>
         {% endfor %}
     </div>
-    <h2>Chart data in Tables</h2>
+
+     <h1>Chart data in Table</h1>
     <div class="container">
-        {% for chart_name, chart_data in chart.items %}
-        <div class="table-container-fluid">
-            <h3>{{ chart_name }} Data Table</h3>
-            <div class="table">
-                {{ chart_data.table|safe }}
+
+        {% if chart_select %}
+            <div class="table-container-fluid">
+                <div class="table">
+                    <h2>{{ chart_select.title }} Data Table</h2>
+                    {{ chart_select.table|safe }}
+                </div>
             </div>
-        </div><br><br><br><br>
+        {% endif %}
+
+        {% for chart_name, chart_data in chart_rest.items %}
+            <div class="table-container-fluid">
+                <h3>{{ chart_name }} Data Table</h3>
+                <div class="table">
+                    {{ chart_data.table|safe }}
+                </div>
+            </div><br><br>
         {% endfor %}
     </div>
 </body>

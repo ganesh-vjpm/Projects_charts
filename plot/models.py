@@ -36,6 +36,7 @@ class Area_plot(models.Model):
     id=models.IntegerField(primary_key=True)
     month=models.CharField(max_length=50)
     newcustomer=models.IntegerField()
+    oldcustomer=models.IntegerField()
 
     class Meta:
         db_table='area_plot'
