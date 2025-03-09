@@ -95,10 +95,10 @@
         {% if chart_select %}
             <div class="table-container-fluid">
                 <div class="table">
-                    <h2>{{ chart_select.title }} Data Table</h2>
+                    <h3>{{ chart_select.title }} Data Table</h3>
                     {{ chart_select.table|safe }}
                 </div>
-            </div>
+            </div><br><br>
         {% endif %}
 
         {% for chart_name, chart_data in chart_rest.items %}
