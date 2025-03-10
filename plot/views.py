@@ -21,7 +21,7 @@ def line_chart():
     data=Line_plot.objects.all()
     month=[obj.month for obj in data]
     sales=[obj.sales for obj in data]
-    df=pd.DataFrame({'month':month,'sales':sales})
+    df=pd.DataFrame({'month':month,'sales':sales}).to_html(classes='table',index=False)
     plt.clf()
     plt.figure(figsize=(5,5))
     plt.plot(month,sales)
@@ -34,7 +34,7 @@ def line_chart():
     img=img_scr()
     print(plt)
     plt.close()
-    return img,df.to_html(classes='table',index=False)
+    return img,df
 
 def bar_chart():
     data=Bar_plot.objects.all()
@@ -233,6 +233,7 @@ def home(request):
     box_img,box_table=box_chart()
     stacked_img,stacked_table=stacked_bar_chart()
     heat_img,heat_table=heatmap_chart()
+    
     plot_type=None
 
     if request.method=='POST':
